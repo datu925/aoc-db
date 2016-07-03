@@ -1,0 +1,9 @@
+<%= form_for @user do |f| %>
+  First name: <%= f.text_field :first_name %><br />
+  Last name : <%= f.text_field :last_name %><br />
+  Email : <%= f.text_field :email %><br />
+  Password : <%= f.text_field :password %><br />
+  Account Type : <%= f.text_field :account_type %><br />
+  <p>Note: non-actor (i.e. theater) account types must be approved by a moderator before you will be able to access the database.</p>
+  <%= f.submit :Register %>
+<% end %>
