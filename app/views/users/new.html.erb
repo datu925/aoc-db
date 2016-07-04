@@ -1,9 +1,57 @@
-<%= form_for @user do |f| %>
+<%= form_for @user, url: users_path, html: { multipart: true } do |f| %>
+  Required fields:
   First name: <%= f.text_field :first_name %><br />
   Last name : <%= f.text_field :last_name %><br />
   Email : <%= f.text_field :email %><br />
-  Password : <%= f.text_field :password %><br />
-  Account Type : <%= f.text_field :account_type %><br />
+  Password : <%= f.password_field :password %><br />
+  Phone : <%= f.text_field :phone %><br />
+  Union Status:<br /><%= f.collection_check_boxes :union_ids, Union.all, :id, :name %></br>
+  Self-Identification:<br />
+  <%= f.collection_check_boxes :identity_ids, Identity.first(127), :id, :name %></br>
+  Account Type : <%= f.select(:account_type, options_for_select(
+  [
+    ['Actor', 1],
+    ['Theater', 2]
+  ], 1
+)) %>
   <p>Note: non-actor (i.e. theater) account types must be approved by a moderator before you will be able to access the database.</p>
+
+  Optional fields:<br />
+  <%= fields_for :detail, @user.actor_detail do |detail| %>
+  Representation: <%= detail.text_field :representation %><br />
+  Website: <%= detail.text_field :website %><br />
+  Location: <%= detail.text_field :location %><br />
+  Gender Identity:<br />
+  <%= f.collection_check_boxes :gender_ids, Gender.all, :id, :name %></br>
+  Age minimum: <%= detail.number_field :age_min %><br />
+  Age maximum: <%= detail.number_field :age_max %><br />
+  Pronouns: <%= detail.text_field :pronouns %><br />
+  Height (format: 5'10"): <%= detail.text_field :height %><br />
+  Weight (lbs): <%= detail.text_field :weight %><br />
+  Are you a singer?: Yes <%= detail.radio_button :singer, "yes" %> No <%= detail.radio_button :singer, "no" %><br />
+
+  Voice type:</br>
+  <%= detail.collection_check_boxes :voice_type_ids, VoiceType.all, :id, :name %><br />
+  Vocal range: <%= detail.text_field :vocal_range %><br />
+
+
+  Dance:</br>
+  <%= detail.collection_check_boxes :dance_type_ids, DanceType.all, :id, :name %><br />
+  Dance styles: <%= detail.text_field :dance_styles %><br />
+
+  Experience with Classical Text? Yes <%= detail.radio_button :classical, "yes" %> No <%= detail.radio_button :classical, "no" %><br />
+
+  Musical instrument? <%= detail.text_field :instrument %><br />
+
+
+  Religion:</br>
+  <%= detail.collection_check_boxes :religion_ids, Religion.all, :id, :name %><br />
+
+  Disability self-identification? <%= detail.text_field :disability %><br />
+
+  Short Bio <%= detail.text_area :bio %><br />
+
+  Headshot: <%= detail.file_field :headshot %><br />
+  <% end %>
   <%= f.submit :Register %>
 <% end %>
