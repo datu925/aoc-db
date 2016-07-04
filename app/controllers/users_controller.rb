@@ -4,14 +4,14 @@ class UsersController < ApplicationController
   end
 
   def create
-    # byebug
     @user = User.new(user_params)
-    @user.actor_detail = ActorDetail.create(details_params)
-    if @user.save && @detail.save
+    @user.actor_detail = ActorDetail.new(details_params)
+    # byebug
+    if @user.save
       session[:user_id] = @user.id
       redirect_to '/'
     else
-      byebug
+      # byebug
       render 'new'
     end
   end

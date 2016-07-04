@@ -1,22 +1,16 @@
 <div>
   <h1><%= @user.full_name %></h1>
-  <% if current_user.id == @user.id %>
-    <p>Currently using <%= link_to @user.email, "mailto:#{@user.email}" %> as contact email</p>
-  <% elsif contact_visible? %>
-    <p><%= link_to @user.email, "mailto:#{@user.email}" %></p>
-  <% end %>
 </div>
 
 <div id='content'>
   <div id='left-col'>
-    <img src="/1994-dan-turcza.jpg" alt="Profile picture">
+    <%= image_tag @detail.headshot.url %>
   </div>
   <div id='right-col'>
     <h3>Summary</h3>
     <ul>
-      <li>Phone: <%= @detail.phone %></li>
+      <li>Phone: <%= @user.phone %></li>
       <li>Email: <%= @user.email %></li>
-      <li>Union Status: <%= @detail.union %></li>
     </ul>
   </div>
 </div>
