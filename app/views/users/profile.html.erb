@@ -1,5 +1,7 @@
 <div>
   <h1><%= @user.full_name %></h1>
+  <%= link_to "Delete my profile", user_path(@user), data: {confirm: 'Are you sure? This is irreversible and your data will be lost.'}, method: :delete %>
+  <%= link_to "Edit my profile", edit_user_path(@user) %>
 </div>
 
 <div id='content'>
