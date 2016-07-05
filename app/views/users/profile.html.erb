@@ -7,11 +7,18 @@
 <div id='content'>
   <div id='left-col'>
     <%= image_tag @detail.headshot.url(:medium) %>
+    <% if !@detail.headshot.exists? %>
+      <p>No headshot submitted!</p>
+    <% end %>
   </div>
   <div id='right-col'>
     <h3>Summary</h3>
     <p>Bio: <%= @detail.bio %></p>
-    <p>Resume: <a href="<%= @detail.resume %>">Click to download resume</a></p>
+    <% if @detail.resume.exists? %>
+      <p>Resume: <a href="<%= @detail.resume %>">Click to download resume</a></p>
+    <% else %>
+      <p>No resume submitted</p>
+    <% end %>
     <ul>
       <li>Phone: <a href="tel:<%= @user.phone %>"><%= @user.phone %></a></li>
       <li>Email: <a href="mailto:<%= @user.email %>"><%= @user.email %></a></li>

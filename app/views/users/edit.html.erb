@@ -12,7 +12,7 @@
     <br />
     <% if @detail.resume.exists? %>
       Current resume:
-      <%= image_tag @detail.resume.url(:thumb) %></br>
+      <%= image_tag @detail.resume.url %></br>
       Upload a new one: <%= detail.file_field :resume %><br />
       Or delete without uploading a new one: <%= detail.check_box :delete_resume %>Delete Image<br/><br />
     <% else %>
