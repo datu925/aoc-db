@@ -4,13 +4,15 @@
 
 <div id='content'>
   <div id='left-col'>
-    <%= image_tag @detail.headshot.url %>
+    <%= image_tag @detail.headshot.url(:medium) %>
   </div>
   <div id='right-col'>
     <h3>Summary</h3>
+    <p>Bio: <%= @detail.bio %></p>
+    <p>Resume: <a href="<%= @detail.resume %>">Click to download resume</a></p>
     <ul>
-      <li>Phone: <%= @user.phone %></li>
-      <li>Email: <%= @user.email %></li>
+      <li>Phone: <a href="tel:<%= @user.phone %>"><%= @user.phone %></a></li>
+      <li>Email: <a href="mailto:<%= @user.email %>"><%= @user.email %></a></li>
     </ul>
   </div>
 </div>
