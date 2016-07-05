@@ -1,0 +1,23 @@
+<%= form_for @user, url: user_path(@user), html: { multipart: true }, method: "patch" do |f| %>
+  <%= render partial: "form", locals: { f: f } %>
+  <%= fields_for :detail, @user.actor_detail do |detail| %>
+    <% if @detail.headshot.exists? %>
+      Current headshot:
+      <%= image_tag @detail.headshot.url(:thumb) %></br>
+      Upload a new one: <%= detail.file_field :headshot %><br />
+      Or delete without uploading a new one: <%= detail.check_box :delete_headshot %>Delete Image<br/><br />
+    <% else %>
+      Headshot: <%= detail.file_field :headshot %><br />
+    <% end %>
+    <br />
+    <% if @detail.resume.exists? %>
+      Current resume:
+      <%= image_tag @detail.resume.url %></br>
+      Upload a new one: <%= detail.file_field :resume %><br />
+      Or delete without uploading a new one: <%= detail.check_box :delete_resume %>Delete Image<br/><br />
+    <% else %>
+      Resume: <%= detail.file_field :resume %><br />
+    <% end %>
+  <% end %>
+  <%= f.submit :Update %>
+<% end %>
